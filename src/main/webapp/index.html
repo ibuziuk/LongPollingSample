@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Long Polling Sample</title>
+<script src="js/libs/jquery/jquery.js"></script>
+</head>
+<body>
+	Long Polling result:
+	<div id="longPollingResult"></div>
+	<script>
+		var output = document.getElementById('longPollingResult');
+		(function poll() {
+			$.ajax({
+				url : "http://localhost:8080/LongPollingSample/longpolling",
+				success : function(data) {
+					output.innerHTML += "</br>" + data;
+				},
+				dataType : "text",
+				complete : poll,
+				timeout : 30000
+			});
+		})();
+	</script>
+</body>
+</html>
